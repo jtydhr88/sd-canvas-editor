@@ -10,6 +10,9 @@ Just like you install other extension of webui:
 3. install
 4. go to Installed, apply and restart UI
 
+or you can just find it from Extensions-> Available, and load the offical index URL, this extension is already included in it:
+<img width="741" alt="image" src="https://user-images.githubusercontent.com/860985/231926610-0b096e92-68d8-4f90-9ec1-7727ce111356.png">
+
 ## Key Feature
 1. Full capability image editor, such as Effects, Crop, Position, Lock, etc
 2. Templates![templates.png](doc/images/templates.png)
