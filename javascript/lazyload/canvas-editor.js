@@ -12,6 +12,10 @@ await _import();
 
 (async function () {
     const container = gradioApp().querySelector('#canvas-editor-container');
+
+    const parent = container.parentNode;
+    parent.classList.remove("prose");
+
     const apiKey = gradioApp().querySelector('#canvas-editor-polotno-api-key');
     const apiKeyValue = apiKey.value;
 
