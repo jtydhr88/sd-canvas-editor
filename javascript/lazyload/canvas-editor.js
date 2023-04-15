@@ -43,7 +43,30 @@ await _import();
         return new File([u8arr], filename, {type:mime});
     }
 
-    window.sendImageCanvasEditor = async function (type, index) {
+    window.sendImageCanvasEditor = async function (type) {
+        const imageDataURL = await store.toDataURL();
+
+        var file = dataURLtoFile(imageDataURL, 'my-image-file.jpg');
+
+        const dt = new DataTransfer();
+        dt.items.add(file);
+
+        const selector = type === "img2img_img2img" ? "#img2img_image" : "#img2maskimg";
+
+        if (type === "img2img_img2img") {
+            switch_to_img2img();
+        } else if (type === "img2img_inpaint") {
+            switch_to_inpaint();
+        }
+
+        let container = gradioApp().querySelector(selector);
+
+        const imageElems = container.querySelectorAll('div[data-testid="image"]')
+
+        updateGradioImage(imageElems[0], dt);
+    }
+
+    window.sendImageCanvasEditorControlNet = async function (type, index) {
         const imageDataURL = await store.toDataURL();
 
         var file = dataURLtoFile(imageDataURL, 'my-image-file.jpg');

@@ -109,20 +109,27 @@ def on_ui_tabs():
         with gr.Row():
             gr.HTML('<div id="canvas-editor-container"></div>')
         with gr.Row():
-            send_t2t = gr.Button(value="Send to txt2img")
-            send_i2i = gr.Button(value="Send to img2img")
+            with gr.Accordion("img2img", open=True):
+                send_i2i_i2i = gr.Button(value="Send to img2img")
+                send_i2i_inpaint = gr.Button(value="Send to inpaint")
+            with gr.Accordion("ControlNet", open=True):
+                send_t2t_controlnet = gr.Button(value="Send to txt2img")
+                send_i2i_controlnet = gr.Button(value="Send to img2img")
 
-            try:
-                control_net_num = opts.control_net_max_models_num
-            except:
-                control_net_num = 1
+                try:
+                    control_net_num = opts.control_net_max_models_num
+                except:
+                    control_net_num = 1
 
-            select_target_index = gr.Dropdown([str(i) for i in range(control_net_num)],
-                                              label="Send to", value="0", interactive=True,
-                                              visible=(control_net_num > 1))
+                select_target_index = gr.Dropdown([str(i) for i in range(control_net_num)],
+                                                  label="Send to", value="0", interactive=True,
+                                                  visible=(control_net_num > 1))
 
-            send_t2t.click(None, select_target_index, None, _js="(i) => {sendImageCanvasEditor('txt2img', i)}")
-            send_i2i.click(None, select_target_index, None, _js="(i) => {sendImageCanvasEditor('img2img', i)}")
+            send_t2t_controlnet.click(None, select_target_index, None, _js="(i) => {sendImageCanvasEditorControlNet('txt2img', i)}")
+            send_i2i_controlnet.click(None, select_target_index, None, _js="(i) => {sendImageCanvasEditorControlNet('img2img', i)}")
+            send_i2i_i2i.click(None, send_i2i_i2i, None, _js="sendImageCanvasEditor('img2img_img2img')")
+            send_i2i_inpaint.click(None, send_i2i_inpaint, None, _js="sendImageCanvasEditor('img2img_inpaint')")
+
 
     return [(canvas_editor, "Canvas Editor", "canvas_editor")]
 
