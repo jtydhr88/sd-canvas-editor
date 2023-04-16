@@ -19,7 +19,11 @@ class Script(scripts.Script):
         return scripts.AlwaysVisible
 
     def ui(self, is_img2img):
-        return ()
+        send_canvas_editor = gr.Button(value="Send to Canvas Editor")
+
+        send_canvas_editor.click(None, send_canvas_editor, None, _js="sendImageToCanvasEditor")
+
+        return [send_canvas_editor]
 
 
 def wrap_api(fn):
@@ -80,7 +84,6 @@ def jscall(
     v_sink2 = gr.Textbox()
     v_fire.click(fn=wrap_api(fn), inputs=[v_args], outputs=[v_sink, v_sink2])
     v_sink2.change(fn=None, _js=js(name), inputs=[v_sink], outputs=[sink])
-
 
 def on_ui_tabs():
     id = lambda s: f'canvas-editor-{s}'

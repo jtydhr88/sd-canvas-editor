@@ -66,6 +66,64 @@ await _import();
         updateGradioImage(imageElems[0], dt);
     }
 
+    function getCanvasEditorTabIndex(){
+        const tabCanvasEditorDiv = document.getElementById('tab_canvas_editor');
+        const parent = tabCanvasEditorDiv.parentNode;
+        const siblings = parent.childNodes;
+
+        let index = -1;
+        for (let i = 0; i < siblings.length; i++) {
+          if (siblings[i] === tabCanvasEditorDiv) {
+            index = i;
+            break;
+          }
+        }
+
+        return index / 3;
+    }
+
+    function isTxt2Img() {
+        const div = document.getElementById('tab_txt2img');
+        const computedStyle = window.getComputedStyle(div);
+        const displayValue = computedStyle.getPropertyValue('display');
+
+        return !(displayValue === 'none');
+    }
+
+    window.sendImageToCanvasEditor = function () {
+        const gallerySelector = isTxt2Img()? '#txt2img_gallery': '#img2img_gallery';
+
+        const txt2imgGallery = gradioApp().querySelector(gallerySelector);
+
+        const img = txt2imgGallery.querySelector(".preview img");
+
+        if (img) {
+            const tabIndex = getCanvasEditorTabIndex();
+
+            const width = img.naturalWidth; // 获取图片的原始宽度
+            const height = img.naturalHeight;
+
+            gradioApp().querySelector('#tabs').querySelectorAll('button')[tabIndex - 1].click();
+
+            store.activePage?.addElement({
+                type: 'image',
+                src: img.src,
+                width: width,
+                height: height,
+                selectable: true,
+                alwaysOnTop: false,
+                showInExport: true,
+                draggable: true,
+                contentEditable: true,
+                removable: true,
+                resizable: true,
+            });
+        }
+        else {
+            alert("No image selected");
+        }
+    }
+
     window.sendImageCanvasEditorControlNet = async function (type, index) {
         const imageDataURL = await store.toDataURL();
 
