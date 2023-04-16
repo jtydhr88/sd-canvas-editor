@@ -19,16 +19,13 @@ await _import();
     const apiKey = gradioApp().querySelector('#canvas-editor-polotno-api-key');
     const apiKeyValue = apiKey.value;
 
-    const { store } = createPolotnoApp({
-        // this is a demo key just for that project
-        // (!) please don't use it in your projects
-        // to create your own API key please go here: https://polotno.com/cabinet
+    createPolotnoApp({
         key: apiKeyValue,
-        // you can hide back-link on a paid license
-        // but it will be good if you can keep it for Polotno project support
-        showCredit: true,
-        container: container,
-      });
+        container: container
+    });
+
+    const store = getPolotnoStore();
+
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','),
         mime = arr[0].match(/:(.*?);/)[1],
