@@ -21,6 +21,7 @@ import {
     SizeSection,
 } from 'polotno/side-panel';
 import {DEFAULT_SECTIONS} from "polotno/side-panel/side-panel";
+import { DownloadButton } from 'polotno/toolbar/download-button';
 
 let _txt2imgInfoJSON;
 let _img2imgInfoJSON;
@@ -182,6 +183,25 @@ const sections = [
     Img2ImgPhotos,
 ];
 
+const ActionControls = ({store}) => {
+    return (
+        <div>
+            <DownloadButton store={store}/>
+        </div>
+    );
+};
+
+const MyToolbar = ({store}) => {
+    return (
+        <Toolbar
+            store={store}
+            components={{
+                ActionControls,
+            }}
+        />
+    );
+};
+
 export const App = ({store}) => {
     return (
         <PolotnoContainer style={{width: '95vw', height: '90vh'}}>
@@ -189,7 +209,7 @@ export const App = ({store}) => {
                 <SidePanel store={store} sections={sections}/>
             </SidePanelWrap>
             <WorkspaceWrap>
-                <Toolbar store={store}/>
+                <MyToolbar store={store}/>
                 <Workspace store={store}/>
                 <ZoomButtons store={store}/>
             </WorkspaceWrap>
