@@ -1,5 +1,5 @@
 # Stable Diffusion WebUI Canvas Editor
-A custom extension for [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui) that integrated a full capability canvas editor which you can use layer, text, image, elements and so on, then send to ControlNet, basing on [Polotno](https://polotno.com/).  
+A custom extension for [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui) that integrated a full capability canvas editor which you can use layer, text, image, elements and so on, then send image to or receive image from img2img/inpaint or send image to ContronNet, basing on [Polotno](https://polotno.com/).  
 ![1.png](doc/images/overall.png)
 ![controlnet.png](doc/images/controlnet.png)
 
@@ -15,17 +15,22 @@ or you can just find it from Extensions-> Available, and load the offical index 
 
 ## Key Feature
 1. Full capability image editor, such as Effects, Crop, Position, Lock, etc
-2. Templates![templates.png](doc/images/templates.png)
-3. Text![text.png](doc/images/text.png)
-4. Photos![photos.png](doc/images/photos.png)
-5. Elements![elements.png](doc/images/elements.png)
-6. Upload![upload.png](doc/images/upload.png)
-7. Background![background.png](doc/images/background.png)
-8. Layers![layers.png](doc/images/layers.png)
+2. Templates
+3. Text
+4. Photos
+5. Elements
+6. Upload
+7. Background
+8. Layers
+9. load your local sd generated images as library directly
+10. send image to or receive image from img2img/inpaint
+11. send image to ContronNet
+
+![panels.png](doc/images/panels.png)
 
 ## Further Plan
-1. rebuild Polotno
-2. Send image to img2img, Sketch, Inpaint, etc
+1. rebuild Polotno (Done)
+2. Send image to img2img, Sketch, Inpaint, etc (Done)
 3. Pen and eraser support
 4. connect to Segment Anything to segment image
 5. any suggestions or requirements are welcome
