@@ -1,3 +1,5 @@
+import json
+
 import gradio as gr
 
 import modules.scripts as scripts
@@ -7,6 +9,59 @@ import os
 from typing import Callable
 from modules.shared import opts
 from modules import shared
+
+def get_file_paths(folder):
+    file_paths = []
+
+    for root, directories, files in os.walk(folder):
+        for filename in files:
+            file_path = os.path.join(root, filename)
+            file_url = 'file=' + file_path.replace('\\', '/')
+            file_paths.append({'url': file_url})
+
+    file_paths.reverse()
+
+    return file_paths
+
+def get_img_file_paths(args):
+    args = args[2: len(args) - 2]
+    args = args.replace("\\", "")
+
+    page_info = json.loads(args)
+
+    page_type = page_info['type']
+    page_num = int(page_info['num'])
+    page_size = int(page_info['size'])
+
+    path = os.path.dirname(os.path.realpath(__file__))
+
+    path = os.path.dirname(path)
+
+    path = os.path.dirname(path)
+
+    path = os.path.dirname(path)
+
+    if page_type == 'txt2img':
+        path = os.path.join(path, "outputs", "txt2img-images")
+    elif page_type == 'img2img':
+        path = os.path.join(path, "outputs", "img2img-images")
+
+    img_file_paths = get_file_paths(path)
+
+    total_len = len(img_file_paths)
+
+    start = (page_num - 1) * page_size
+    end = start + page_size
+
+    if start > total_len:
+        return json.dumps("[false]")
+    elif end > total_len:
+        end = total_len
+
+    img_file_paths = img_file_paths[start: end]
+
+    return json.dumps(img_file_paths)
+# 要遍历的文件夹路径
 
 class Script(scripts.Script):
     def __init__(self) -> None:
@@ -108,6 +163,10 @@ def on_ui_tabs():
         import_id = 'canvas-editor-import'
 
         gr.HTML(value='\n'.join(js_), elem_id=import_id, visible=False)
+
+        with gr.Group(visible=False):
+            sink = gr.HTML(value='', visible=False)  # to suppress error in javascript
+            jscall('getImgFilePaths', get_img_file_paths, id, js, sink)
 
         with gr.Row():
             gr.HTML('<div id="canvas-editor-container"></div>')

@@ -11,6 +11,8 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
+    "@meronex/icons": "^4.0.0",
+    "mobx-react-lite": "^3.4.3",
     "polotno": "^1.8.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
