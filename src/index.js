@@ -219,13 +219,14 @@ export const App = ({store}) => {
 
 let _store;
 
-export const createPolotnoApp = ({key, container}) => {
+export const createPolotnoApp = ({key, container, width, height}) => {
     const store = createStore({
         key: key,
         showCredit: true,
     });
 
     store.addPage();
+    store.setSize(Number(width), Number(height), true)
 
     const root = ReactDOM.createRoot(container);
 

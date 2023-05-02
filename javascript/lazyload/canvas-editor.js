@@ -21,6 +21,12 @@ let _r = 0;
     const apiKey = gradioApp().querySelector('#canvas-editor-polotno-api-key');
     const apiKeyValue = apiKey.value;
 
+    const defaultWidth = gradioApp().querySelector('#canvas-editor-default_width');
+    const defaultWidthValue = defaultWidth.value;
+
+    const defaultHeight = gradioApp().querySelector('#canvas-editor-default_height');
+    const defaultHeightValue = defaultHeight.value;
+
     setLoadMoreFunc(py2js);
 
     const txt2ImgFilePaths = await py2js('getImgFilePaths', '{"type":"txt2img", "num":1, "size":15}');
@@ -38,7 +44,9 @@ let _r = 0;
 
     createPolotnoApp({
         key: apiKeyValue,
-        container: container
+        container: container,
+        width: defaultWidthValue,
+        height: defaultHeightValue
     });
 
     const store = getPolotnoStore();

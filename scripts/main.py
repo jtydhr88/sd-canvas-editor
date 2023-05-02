@@ -158,6 +158,20 @@ def on_ui_tabs():
         except:
             polotno_api_key = "bHEpG9Rp0Nq9XrLcwFNu"
 
+        try:
+            canvas_default_width = opts.canvas_editor_default_width
+        except:
+            canvas_default_width = "1024"
+
+        try:
+            canvas_default_height = opts.canvas_editor_default_height
+        except:
+            canvas_default_height = "1024"
+
+        gr.HTML(f'<input type="hidden" id="canvas-editor-default_width" value="{canvas_default_width}" />', visible=False)
+
+        gr.HTML(f'<input type="hidden" id="canvas-editor-default_height" value="{canvas_default_height}" />', visible=False)
+
         gr.HTML(f'<input type="hidden" id="canvas-editor-polotno-api-key" value="{polotno_api_key}" />', visible=False)
 
         import_id = 'canvas-editor-import'
@@ -211,6 +225,12 @@ def on_ui_settings():
     section = ('canvas-editor', "Canvas Editor")
     shared.opts.add_option("polotno_api_key", shared.OptionInfo(
         "bHEpG9Rp0Nq9XrLcwFNu", "Polotno API Key", section=section))
+    shared.opts.add_option("canvas_editor_default_width", shared.OptionInfo(
+        1024, "Canvas Default Width", gr.Slider, {"minimum": 256, "maximum": 2048, "step": 64, "interactive": True},
+        section=section))
+    shared.opts.add_option("canvas_editor_default_height", shared.OptionInfo(
+        1024, "Canvas Default Height", gr.Slider, {"minimum": 256, "maximum": 2048, "step": 64, "interactive": True},
+        section=section))
 
 script_callbacks.on_ui_tabs(on_ui_tabs)
 script_callbacks.on_ui_settings(on_ui_settings)
