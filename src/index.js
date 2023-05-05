@@ -171,7 +171,6 @@ const Img2ImgPhotos = {
 
 
 const sections = [
-    TemplatesSection,
     TextSection,
     PhotosSection,
     ElementsSection,
