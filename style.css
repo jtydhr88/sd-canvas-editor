@@ -5525,7 +5525,7 @@
 #canvas-editor-container .bp4-dark .bp4-divider{
   border-color:rgba(255, 255, 255, 0.2);
 }
-.bp4-control-group{
+#canvas-editor-container .bp4-control-group{
   -webkit-transform:translateZ(0);
           transform:translateZ(0);
   display:-webkit-box;
@@ -7283,7 +7283,7 @@ label.bp4-label:not(.bp4-inline) .bp4-popover-target{
 .bp4-dark label.bp4-label.bp4-disabled .bp4-text-muted{
   color:rgba(171, 179, 191, 0.6);
 }
-.bp4-numeric-input .bp4-button-group.bp4-vertical > .bp4-button{
+#canvas-editor-container .bp4-numeric-input .bp4-button-group.bp4-vertical > .bp4-button{
   -webkit-box-flex:1;
       -ms-flex:1 1 14px;
           flex:1 1 14px;
@@ -7291,7 +7291,7 @@ label.bp4-label:not(.bp4-inline) .bp4-popover-target{
   padding:0;
   width:30px;
 }
-.bp4-numeric-input.bp4-large .bp4-button-group.bp4-vertical > .bp4-button{
+#canvas-editor-container .bp4-numeric-input.bp4-large .bp4-button-group.bp4-vertical > .bp4-button{
   width:40px;
 }
 
