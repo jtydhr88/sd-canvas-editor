@@ -74,11 +74,7 @@ class Script(scripts.Script):
         return scripts.AlwaysVisible
 
     def ui(self, is_img2img):
-        send_canvas_editor = gr.Button(value="Send to Canvas Editor")
-
-        send_canvas_editor.click(None, send_canvas_editor, None, _js="sendImageToCanvasEditor")
-
-        return [send_canvas_editor]
+        return []
 
 
 def wrap_api(fn):

@@ -112,12 +112,8 @@ let _r = 0;
         return !(displayValue === 'none');
     }
 
-    window.sendImageToCanvasEditor = function () {
-        const gallerySelector = isTxt2Img() ? '#txt2img_gallery' : '#img2img_gallery';
-
-        const txt2imgGallery = gradioApp().querySelector(gallerySelector);
-
-        const img = txt2imgGallery.querySelector(".preview img");
+    window.sendImageToCanvasEditor = function (gallery) {
+        const img = gallery.querySelector(".preview img");
 
         if (img) {
             const tabIndex = getCanvasEditorTabIndex();
