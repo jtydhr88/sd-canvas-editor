@@ -88,7 +88,7 @@ let _r = 0;
         updateGradioImage(imageElems[0], dt);
     }
 
-    function getCanvasEditorTabIndex() {
+    window.getCanvasEditorTabIndex = function () {
         const tabCanvasEditorDiv = document.getElementById('tab_canvas_editor');
         const parent = tabCanvasEditorDiv.parentNode;
         const siblings = parent.childNodes;
@@ -112,30 +112,34 @@ let _r = 0;
         return !(displayValue === 'none');
     }
 
+    window.sendImageToCanvasEditorDirect = function (img) {
+        const tabIndex = getCanvasEditorTabIndex();
+
+        const width = img.naturalWidth;
+        const height = img.naturalHeight;
+
+        gradioApp().querySelector('#tabs').querySelectorAll('button')[tabIndex - 1].click();
+
+        store.activePage?.addElement({
+            type: 'image',
+            src: img.src,
+            width: width,
+            height: height,
+            selectable: true,
+            alwaysOnTop: false,
+            showInExport: true,
+            draggable: true,
+            contentEditable: true,
+            removable: true,
+            resizable: true,
+        });
+    }
+
     window.sendImageToCanvasEditor = function (gallery) {
         const img = gallery.querySelector(".preview img");
 
         if (img) {
-            const tabIndex = getCanvasEditorTabIndex();
-
-            const width = img.naturalWidth; // 获取图片的原始宽度
-            const height = img.naturalHeight;
-
-            gradioApp().querySelector('#tabs').querySelectorAll('button')[tabIndex - 1].click();
-
-            store.activePage?.addElement({
-                type: 'image',
-                src: img.src,
-                width: width,
-                height: height,
-                selectable: true,
-                alwaysOnTop: false,
-                showInExport: true,
-                draggable: true,
-                contentEditable: true,
-                removable: true,
-                resizable: true,
-            });
+            sendImageToCanvasEditorDirect(img);
         } else {
             alert("No image selected");
         }
