@@ -112,11 +112,9 @@ let _r = 0;
         return !(displayValue === 'none');
     }
 
-    window.sendImageToCanvasEditorDirect = function (img) {
+    window.sendImageToCanvasEditorDirect = function (img, width, height) {
         const tabIndex = getCanvasEditorTabIndex();
 
-        const width = img.naturalWidth;
-        const height = img.naturalHeight;
 
         gradioApp().querySelector('#tabs').querySelectorAll('button')[tabIndex - 1].click();
 
@@ -139,7 +137,10 @@ let _r = 0;
         const img = gallery.querySelector(".preview img");
 
         if (img) {
-            sendImageToCanvasEditorDirect(img);
+            const width = img.naturalWidth;
+            const height = img.naturalHeight;
+
+            sendImageToCanvasEditorDirect(img, width, height);
         } else {
             alert("No image selected");
         }
