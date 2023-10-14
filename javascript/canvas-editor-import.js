@@ -48,9 +48,11 @@
             const newButton = existingButton.cloneNode(true);
             newButton.style.display = "flex";
             newButton.id = `${queryId}_send_to_canvasEditor`;
-            newButton.textContent = "Send to CanvasEditor";
             newButton.addEventListener("click", () => sendImageToCanvasEditor(gallery));
-            gradioApp().querySelector(`#${queryId}`).appendChild(newButton);
+            newButton.title = "Send to Canvas Editor"
+            newButton.textContent = "\u{2712}";
+
+            existingButton.parentNode.appendChild(newButton);
         }
     });
 
