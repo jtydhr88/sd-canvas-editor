@@ -12334,6 +12334,7 @@ body.bp4-overlay-open{
   position:absolute;
   right:0;
   top:0;
+  color:#1c2127;
 }
 @-webkit-keyframes linear-progress-bar-stripes{
   from{
